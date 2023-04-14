@@ -1,28 +1,3 @@
-<!-- <head>
-  <link rel="stylesheet" href="../../public/stylesheet.css">
-</head>
-<div class="container">
-  <h1 class="page-header">Reminders</h1>
-<ul class="list-group">
-  <% reminders.forEach(function (reminderItem) { %>
-    <li class="list-group-item">
-      <strong><%= reminderItem.title %>: </strong>
-      <%= reminderItem.description %>
-      || Completed:
-      <% if (reminderItem.completed == true) { %>
-        <span class="badge badge-success">True</span>
-      <% } else if (reminderItem.completed == false) { %>
-        <span class="badge badge-danger">False</span>
-      <% } %>
-      <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
-    </li>
-  <% }) %>
-</ul>
-</div>
-<form method="GET" action="/socialshare">
-  <button type="submit" class="btn btn-default btn-sm btn-social-share">Social Share</button>
-</form> 
--->
 <div class="container">
   <h1 class="page-header">Reminders</h1>
 

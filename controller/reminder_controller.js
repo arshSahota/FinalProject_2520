@@ -3,32 +3,6 @@ let userModel = require("../database").userModel;
 
 
 let remindersController = {
-  // list: (req, res) => {
-  //   if (!req.user) {
-  //     res.redirect("/login");
-  //     return;
-  //   }
-  
-  //   const user = database.userModel.findById(req.user.id);
-  //   res.render("reminder/index", { reminders: user.reminders, user: req.user });
-  // },
-  //correct
-  // list: (req, res) => {
-  //   if (!req.user) {
-  //     res.redirect("/login");
-  //     return;
-  //   }
-
-  //   const user = database.userModel.findById(req.user.id);
-  //   // res.render("reminder/index", { reminders: user.reminders, user: req.user });
-  //   const friends = user.people;
-  //   const friendsReminders = [];
-  //   friends.forEach(id => {
-  //     const friend = userModel.findById(id);
-  //     friendsReminders.push({ name: friend.name, reminders: friend.reminders });
-  //   });
-  //   res.render("reminder/index", { reminders: user.reminders, user: req.user, friends: friendsReminders });
-  // },
   list: (req, res) => {
   if (!req.user) {
     res.redirect("/login");
@@ -36,7 +10,7 @@ let remindersController = {
   }
 
   const user = database.userModel.findById(req.user.id);
-  const friendsIds = user.people || []; // Make sure user.people is an array, even if undefined
+  const friendsIds = user.people || [];
   const friendsReminders = [];
 
   friendsIds.forEach(id => {
@@ -133,10 +107,6 @@ update: (req, res) => {
     currentUser.reminders = currentUser.reminders.filter((reminder) => reminder.id !== id);
     res.redirect("/reminders");
   }, 
-  // getSocialShare: (req, res) => {
-  //   const people = userModel.getAllUsers();
-  //   res.render("reminder/socialshare", { people });
-  // },
   getSocialShare: (req, res) => {
     const people = userModel.getAllUsers().filter(user => user.id !== req.user.id);
     res.render("reminder/socialshare", { people });
