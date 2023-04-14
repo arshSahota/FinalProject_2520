@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>People List</title>
+  <link rel="stylesheet" href="../../public/stylesheet.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/reminders">Reminder List</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/reminders">Reminder List</a>
+        <a class="nav-item nav-link" href="/reminder/new">Create</a>
+        <form method="POST" action="/logout">
+          <button id="logoutBtn" type="submit" class="btn btn-default btn-sm">Logout</button>
+        </form>
+        
+      </div>
+    </div>
+  </nav>
+  <h1>People List</h1>
+  <ul>
+    <% for(let i=0; i<people.length; i++) { %>
+      <form action="/follow" method="post">
+        <input type="hidden" name="followedId" value="<%= people[i].id %>">
+        <li><%= people[i].name %> <button data-id="<%= people[i].id %>" class="follow-btn" type="submit">Follow</button></li>
+      </form>
+    <% } %>
+  </ul>
+</body>
+</html>

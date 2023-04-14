@@ -1,0 +1,113 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="../../public/stylesheet.css">
+</head>
+<form style="margin-left: 50px;"action=<%= "/reminder/update/" + reminderItem.id %> method="POST">
+  <label for="title">Title</label>
+  <input type="text" name="title" class="form-control" id="titleInput" value="<%= reminderItem.title %>">
+</div>
+<div class="form-group">
+  <label for="description">Description</label>
+  <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"><%= reminderItem.description %></textarea>
+</div>
+<div class="form-group">
+  <label for="completed">Completed</label>
+  <div class="radio">
+    <label>
+      <% if (reminderItem.completed == true) { %>
+        <input type="radio" name="completed" id="true" value="true" checked="checked">
+      <% } else { %>
+        <input type="radio" name="completed" id="true" value="true">
+      <% } %>
+      True
+    </label>
+    <div class="radio">
+      <label>
+        <% if (reminderItem.completed == false) { %>
+          <input type="radio" name="completed" id="false" value="false" checked="checked">
+        <% } else { %>
+          <input type="radio" name="completed" id="false" value="false">
+        <% } %>
+        False
+      </label>
+    </div>
+<div class="form-group">
+  <label for="tags">Tags</label>
+  <div id="tags-container" class="tags-container">
+  </div>
+  <input type="text" class="form-control" id="tag-input" placeholder="Add a tag">
+  <button type="button" class="btn btn-primary mt-2" id="add-tag-btn">Add Tag</button>
+</div>
+<input type="hidden" name="tags" id="tags-input">
+  </div>
+</div>
+<div class="form-group">
+  <label for="subtasks">Subtasks</label>
+  <div id="subtask-container"></div>
+  <input type="text" class="form-control" id="subtask-input" placeholder="Enter a subtask">
+  <button type="button" class="btn btn-primary mt-2" id="add-subtask">Add Subtask</button>
+  </div>
+  <input type="hidden" name="subtasks" id="subtasks-input">
+  <button type="submit" style="background-color: lightgreen;" class="btn btn-default">Submit</button>
+</form>
+
+<script>
+  const subtaskContainer = document.getElementById('subtask-container');
+  const subtaskInput = document.getElementById('subtask-input');
+  const addSubtaskBtn = document.getElementById('add-subtask');
+  const subtasksInput = document.getElementById('subtasks-input');
+
+  addSubtaskBtn.addEventListener('click', () => {
+    const subtask = subtaskInput.value.trim();
+    if (subtask) {
+      const subtaskDiv = document.createElement('div');
+      subtaskDiv.textContent = subtask; // set textContent property to the subtask value
+      subtaskContainer.appendChild(subtaskDiv);
+
+      const currentSubtasks = subtasksInput.value ? subtasksInput.value.split('\n') : [];
+      currentSubtasks.push(subtask);
+      subtasksInput.value = currentSubtasks.join('\n');
+
+      subtaskInput.value = '';
+    }
+  });
+const tagsContainer = document.getElementById('tags-container');
+const tagInput = document.getElementById('tag-input');
+const addTagBtn = document.getElementById('add-tag-btn');
+const tagsInput = document.getElementById('tags-input');
+
+addTagBtn.addEventListener('click', () => {
+  const tag = tagInput.value.trim();
+  if (tag) {
+    const tagDiv = document.createElement('div');
+    tagDiv.textContent = tag;
+    tagsContainer.appendChild(tagDiv);
+    const currentTags = tagsInput.value ? tagsInput.value.split(',') : [];
+    currentTags.push(tag);
+    tagsInput.value = currentTags.join(',');
+
+    tagInput.value = '';
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const existingTags = '<%= existingTags %>'.split(',');
+  const existingSubtasks = '<%= existingSubtasks %>'.split('\n');
+  
+  existingTags.forEach(tag => {
+    if (tag) {
+      const tagDiv = document.createElement('div');
+      tagDiv.textContent = tag;
+      tagsContainer.appendChild(tagDiv);
+    }
+  });
+
+  existingSubtasks.forEach(subtask => {
+    if (subtask) {
+      const subtaskDiv = document.createElement('div');
+      subtaskDiv.textContent = subtask;
+      subtaskContainer.appendChild(subtaskDiv);
+    }
+  });
+});
+</script>

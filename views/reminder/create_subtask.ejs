@@ -1,0 +1,12 @@
+<div class="container">
+    <h1 class="page-header">Create Subtask</h1>
+
+    <form action="/reminder/<%= reminderId %>/subtask/create" method="POST">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="titleInput" placeholder="Title" name="title">
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>

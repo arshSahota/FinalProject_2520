@@ -1,0 +1,21 @@
+<div class="container">
+    <h1 class="page-header">Delete Reminder</h1>
+
+    <form action="/reminder/delete/<%= reminderItem.id %>" method="POST">
+        <p>Are you sure you want to delete this reminder?</p>
+        <h3><strong>
+                <%= reminderItem.title %>:
+            </strong></h3>
+        <h4>
+            <%= reminderItem.description %>
+        </h4>
+        <h4>Completed:
+            <% if (reminderItem.completed==true) { %>
+                <span class="label label-success">True</span>
+                <% } else if (reminderItem.completed==false) { %>
+                    <span class="label label-danger">False</span>
+                    <% } %>
+        </h4>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>
